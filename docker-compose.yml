@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_veterinary
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sornersorneritojiji
+      POSTGRES_DB: VeterinaryDB # Aquí forzamos la creación de tu base de datos
+    ports:
+      - "5433:5432"
+    volumes:
+      - veterinary_db_data:/var/lib/postgresql/data
+
+  # Plantilla para tu aplicación (Descomenta y ajusta cuando la vayas a conectar)
+  # app:
+  #   build: .
+  #   container_name: veterinary_app
+  #   restart: always
+  #   ports:
+  #     - "8080:8080" # Puerto donde corre tu app
+  #   environment:
+  #     - DB_HOST=db
+  #     - DB_PORT=5432 # Internamente en la red de docker usan el 5432
+  #     - DB_USER=postgres
+  #     - DB_PASSWORD=sornersorneritojiji
+  #     - DB_NAME=VeterinaryDB
+  #   depends_on:
+  #     - db
+
+volumes:
+  veterinary_db_data:

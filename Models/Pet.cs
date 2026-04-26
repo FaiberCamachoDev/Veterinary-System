@@ -1,0 +1,18 @@
+namespace VeterinarySystem.Models;
+
+public class Pet
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Species { get; set; } = string.Empty;    // Perro, Gato, etc.
+    public string Breed { get; set; } = string.Empty;
+    public int Age { get; set; }
+    public decimal Weight { get; set; }
+
+    // FK
+    public int OwnerId { get; set; }
+    public Owner Owner { get; set; } = null!;
+
+    // Navegación
+    public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+}
