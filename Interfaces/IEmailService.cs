@@ -1,6 +1,13 @@
-namespace Veterinary_System.Interfaces;
+namespace VeterinarySystem.Interfaces;
 
-public class IEmailService
+public interface IEmailService
 {
+    Task SendAppointmentCreatedAsync(string toEmail, string ownerName, 
+        string petName, DateTime date, TimeOnly time);
     
+    Task SendAppointmentCancelledAsync(string toEmail, string ownerName, 
+        string petName, DateTime date);
+    
+    Task SendTreatmentAssignedAsync(string toEmail, string ownerName, 
+        string petName, string diagnosis);
 }
