@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using VeterinarySystem.Data;
 using VeterinarySystem.Interfaces;
+using VeterinarySystem.Services;
 using VeterinarySystem.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,9 @@ builder.Services.AddDbContext<VeterinaryContext>(options =>
 // Servicios
 builder.Services.AddScoped<IEmailService, EmailService>();
 
+builder.Services.AddScoped<IOwnerService, OwnerService>();
+builder.Services.AddScoped<IPetService, PetService>();
+builder.Services.AddScoped<IVeterinarianService, VeterinarianService>();
 
 var app = builder.Build();
 

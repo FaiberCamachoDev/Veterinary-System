@@ -11,7 +11,7 @@ public class Pet
 
     // FK
     public int OwnerId { get; set; }
-    public Owner Owner { get; set; } = null!;
+    public Owner? Owner { get; set; }
 
     // Navegación
     public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();

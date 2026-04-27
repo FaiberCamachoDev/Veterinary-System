@@ -1,0 +1,36 @@
+@model VeterinarySystem.Models.Owner
+@{
+    ViewData["Title"] = "Eliminar propietario";
+}
+
+<h2>¿Eliminar propietario?</h2>
+<hr />
+
+<div class="alert alert-warning">
+    Esta acción no se puede deshacer.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Nombre</dt>
+    <dd class="col-sm-9">@Model.Name</dd>
+
+    <dt class="col-sm-3">Documento</dt>
+    <dd class="col-sm-9">@Model.Document</dd>
+
+    <dt class="col-sm-3">Email</dt>
+    <dd class="col-sm-9">@Model.Email</dd>
+
+    <dt class="col-sm-3">Mascotas</dt>
+    <dd class="col-sm-9">@Model.Pets.Count</dd>
+</dl>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

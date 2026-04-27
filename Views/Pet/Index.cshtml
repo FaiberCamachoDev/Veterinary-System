@@ -1,0 +1,53 @@
+@model List<VeterinarySystem.Models.Pet>
+@{
+    ViewData["Title"] = "Mascotas";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Mascotas</h2>
+    <a asp-action="Create" class="btn btn-primary">+ Nueva mascota</a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<table class="table table-hover">
+    <thead class="table-dark">
+    <tr>
+        <th>Nombre</th>
+        <th>Especie</th>
+        <th>Raza</th>
+        <th>Edad</th>
+        <th>Peso</th>
+        <th>Propietario</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var pet in Model)
+    {
+        <tr>
+            <td>@pet.Name</td>
+            <td>@pet.Species</td>
+            <td>@pet.Breed</td>
+            <td>@pet.Age años</td>
+            <td>@pet.Weight kg</td>
+            <td>
+                <a asp-controller="Owner" asp-action="Details" 
+                   asp-route-id="@pet.OwnerId">@pet.Owner.Name</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@pet.Id" class="btn btn-sm btn-info">Ver</a>
+                <a asp-action="Edit" asp-route-id="@pet.Id" class="btn btn-sm btn-warning">Editar</a>
+                <a asp-action="Delete" asp-route-id="@pet.Id" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

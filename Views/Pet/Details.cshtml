@@ -1,0 +1,32 @@
+@model VeterinarySystem.Models.Pet
+@{
+    ViewData["Title"] = "Detalle mascota";
+}
+
+<h2>@Model.Name</h2>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">Especie</dt>
+    <dd class="col-sm-9">@Model.Species</dd>
+
+    <dt class="col-sm-3">Raza</dt>
+    <dd class="col-sm-9">@Model.Breed</dd>
+
+    <dt class="col-sm-3">Edad</dt>
+    <dd class="col-sm-9">@Model.Age años</dd>
+
+    <dt class="col-sm-3">Peso</dt>
+    <dd class="col-sm-9">@Model.Weight kg</dd>
+
+    <dt class="col-sm-3">Propietario</dt>
+    <dd class="col-sm-9">
+        <a asp-controller="Owner" asp-action="Details" 
+           asp-route-id="@Model.OwnerId">@Model.Owner.Name</a>
+    </dd>
+</dl>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</div>

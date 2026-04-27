@@ -1,0 +1,64 @@
+@model VeterinarySystem.Models.Pet
+@{
+    ViewData["Title"] = "Editar mascota";
+}
+
+<h2>Editar mascota</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Nombre</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Species" class="form-label">Especie</label>
+                <select asp-for="Species" class="form-select">
+                    <option value="">-- Seleccionar --</option>
+                    <option>Perro</option>
+                    <option>Gato</option>
+                    <option>Ave</option>
+                    <option>Conejo</option>
+                    <option>Reptil</option>
+                    <option>Otro</option>
+                </select>
+                <span asp-validation-for="Species" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Breed" class="form-label">Raza</label>
+                <input asp-for="Breed" class="form-control" />
+                <span asp-validation-for="Breed" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Age" class="form-label">Edad (años)</label>
+                <input asp-for="Age" class="form-control" type="number" min="0" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Weight" class="form-label">Peso (kg)</label>
+                <input asp-for="Weight" class="form-control" type="number" step="0.01" min="0" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="OwnerId" class="form-label">Propietario</label>
+                <select asp-for="OwnerId" asp-items="ViewBag.Owners" class="form-select">
+                    <option value="">-- Seleccionar propietario --</option>
+                </select>
+                <span asp-validation-for="OwnerId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
