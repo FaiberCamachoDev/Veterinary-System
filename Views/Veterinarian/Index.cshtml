@@ -1,0 +1,68 @@
+@model IEnumerable<VeterinarySystem.Models.Veterinarian>
+
+@{
+    ViewData["Title"] = "Veterinarios";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Listado de Veterinarios</h2>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Nuevo Veterinario
+    </a>
+</div>
+
+<hr />
+
+@* Aquí mostramos los mensajes de éxito o error que mandamos desde el Controlador con TempData *@
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<table class="table table-striped table-hover mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Especialidad</th>
+            <th>Horario de Atención</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="4" class="text-center">No hay veterinarios registrados.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td><span class="badge bg-info text-dark">@item.Specialty</span></td>
+                    <td>
+                        @* Formateamos la hora para que se vea más limpia (ej. 08:00 - 18:00) *@
+                        <i class="bi bi-clock"></i> @item.AvailableFrom.ToString("HH:mm") - @item.AvailableTo.ToString("HH:mm")
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

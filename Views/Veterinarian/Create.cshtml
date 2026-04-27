@@ -1,0 +1,57 @@
+@model VeterinarySystem.Models.Veterinarian
+
+@{
+    ViewData["Title"] = "Nuevo Veterinario";
+}
+
+<h2>Registrar Veterinario</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            @* Este div mostrará los errores de unicidad (ej. "Ya existe un vet con ese nombre") *@
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3 alert alert-danger" role="alert"></div>
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Nombre Completo</label>
+                <input asp-for="Name" class="form-control" placeholder="Ej. Dr. Juan Pérez" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Specialty" class="form-label">Especialidad</label>
+                <select asp-for="Specialty" class="form-select">
+                    <option value="">-- Seleccionar Especialidad --</option>
+                    <option value="General">Medicina General</option>
+                    <option value="Cirugía">Cirugía</option>
+                    <option value="Dermatología">Dermatología</option>
+                    <option value="Cardiología">Cardiología</option>
+                    <option value="Ortopedia">Ortopedia</option>
+                    <option value="Oftalmología">Oftalmología</option>
+                </select>
+                <span asp-validation-for="Specialty" class="text-danger"></span>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="AvailableFrom" class="form-label">Hora de Inicio</label>
+                    <input asp-for="AvailableFrom" class="form-control" type="time" value="08:00" />
+                    <span asp-validation-for="AvailableFrom" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="AvailableTo" class="form-label">Hora de Fin</label>
+                    <input asp-for="AvailableTo" class="form-control" type="time" value="18:00" />
+                    <span asp-validation-for="AvailableTo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Veterinario</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
