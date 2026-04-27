@@ -1,7 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using VeterinarySystem.Data;
+using VeterinarySystem.Interfaces;
+using VeterinarySystem.Utils;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+// PostgreSQL + EF Core
+builder.Services.AddDbContext<VeterinaryContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Servicios
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 var app = builder.Build();
 

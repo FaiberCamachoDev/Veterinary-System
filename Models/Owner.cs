@@ -1,5 +1,3 @@
-using Veterinary_System.Models;
-
 namespace VeterinarySystem.Models;
 
 public class Owner
@@ -13,5 +11,6 @@ public class Owner
     public DateTime? BlockedUntil { get; set; }
 
     // Navegación
+    public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
     public ICollection<Pet> Pets { get; set; } = new List<Pet>();
 }
