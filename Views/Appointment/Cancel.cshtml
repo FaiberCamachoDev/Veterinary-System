@@ -1,0 +1,33 @@
+@model VeterinarySystem.Models.Appointment
+
+@{
+    ViewData["Title"] = "Cancelar Cita";
+}
+
+<h2>¿Estás seguro de que deseas cancelar esta cita?</h2>
+<div class="alert alert-warning">
+    Al confirmar, el estado de la cita cambiará a "Cancelada" y se le enviará un correo electrónico al cliente notificando la cancelación.
+</div>
+<hr />
+
+<div>
+    <dl class="row mt-3">
+        <dt class="col-sm-3">Fecha</dt>
+        <dd class="col-sm-9">@Model.Date.ToString("dd/MM/yyyy")</dd>
+
+        <dt class="col-sm-3">Horario</dt>
+        <dd class="col-sm-9">@Model.StartTime.ToString("HH:mm") - @Model.EndTime.ToString("HH:mm")</dd>
+
+        <dt class="col-sm-3">Mascota</dt>
+        <dd class="col-sm-9">@Model.Pet.Name</dd>
+
+        <dt class="col-sm-3">Dueño</dt>
+        <dd class="col-sm-9">@Model.Owner.Name (@Model.Owner.Email)</dd>
+    </dl>
+    
+    <form asp-action="Cancel">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Confirmar Cancelación</button>
+        <a asp-action="Index" class="btn btn-secondary">Volver a la agenda</a>
+    </form>
+</div>

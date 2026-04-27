@@ -1,0 +1,72 @@
+@model VeterinarySystem.Models.Appointment
+
+@{
+    ViewData["Title"] = "Agendar Cita";
+}
+
+<h2>Agendar Nueva Cita</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger mb-3 alert alert-danger" role="alert"></div>
+
+            <div class="mb-3">
+                <label asp-for="OwnerId" class="form-label">Dueño</label>
+                <select asp-for="OwnerId" asp-items="ViewBag.Owners" class="form-select">
+                    <option value="">-- Seleccionar Dueño --</option>
+                </select>
+                <span asp-validation-for="OwnerId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="PetId" class="form-label">Mascota</label>
+                <select asp-for="PetId" asp-items="ViewBag.Pets" class="form-select">
+                    <option value="">-- Seleccionar Mascota --</option>
+                </select>
+                <span asp-validation-for="PetId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="VeterinarianId" class="form-label">Veterinario</label>
+                <select asp-for="VeterinarianId" asp-items="ViewBag.Veterinarians" class="form-select">
+                    <option value="">-- Seleccionar Veterinario --</option>
+                </select>
+                <span asp-validation-for="VeterinarianId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Date" class="form-label">Fecha de la Cita</label>
+                <input asp-for="Date" class="form-control" type="date" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="StartTime" class="form-label">Hora de Inicio</label>
+                    <input asp-for="StartTime" class="form-control" type="time" />
+                    <span asp-validation-for="StartTime" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="EndTime" class="form-label">Hora de Fin</label>
+                    <input asp-for="EndTime" class="form-control" type="time" />
+                    <span asp-validation-for="EndTime" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Notes" class="form-label">Notas (Opcional)</label>
+                <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Síntomas, motivo de la visita..."></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Agendar Cita</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
